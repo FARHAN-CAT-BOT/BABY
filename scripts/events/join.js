@@ -48,12 +48,12 @@ module.exports.run = async function({ api, event, Users }) {
   if (event.logMessageData.addedParticipants && Array.isArray(event.logMessageData.addedParticipants) && event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
     //api.changeNickname(`𝗕𝗢𝗧 ${(!global.config.BOTNAME) ? "Buddy" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
 
-    let gifUrl = 'https://i.postimg.cc/mrzwcJsh/GIF-20250712-114810-632.gif';
-let gifPath = __dirname + '/Nayan/join/join.gif';
+    let mp4Url = "http://islamic-cyber-chat-uploading-side.onrender.com/uploaded/fbcf134b.mp4";
+let gifPath = __dirname + '/Nayan/join/join.mp4';
 
-axios.get(gifUrl, { responseType: 'arraybuffer' })
+axios.get(mp4Url, { responseType: 'arraybuffer' })
 .then(response => {
-    fs.writeFileSync(gifPath, response.data);
+    fs.writeFileSync(mp4Path, response.data);
   if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
     api.changeNickname(`[ ${global.config.PREFIX} ] • ➠${(!global.config.BOTNAME) ? "bot" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
     return api.sendMessage("⎯͢⎯⃝🩷🐰 *গা্ঁই্ঁস্ঁ* *মু্ঁই্ঁ* *পি্ঁচ্ছি্ঁ* *ফা্ঁর্ঁহা্ঁন্ঁ* *এ্ঁরৃঁ* *বৃঁটৃঁ* *আ্ঁই্ঁয়া্ঁ* *পৃঁরৃঁছি্ঁ* *মো্ঁরে্ঁ* *কি্ঁ* *দে্ঁহা্ঁ* *যা্ঁয়্ঁ* ⎯͢⎯⃝🩷🐰", event.threadID, () =>api.sendMessage({body:`[🌺আ্ঁস্ঁসা্ঁলা্ঁমু্ঁ💚আ্ঁলা্ঁই্ঁকু্ঁম্ঁ🌺]
@@ -189,4 +189,4 @@ ____________________________________
       }
     } catch (e) { return console.log(e) };
   }
-}
+                   }
