@@ -11,7 +11,7 @@ module.exports.config = {
     version: '1.0',
     role: 0,
     countDowns: 5,
-    credits: 'farhan',
+    credits: 'dipto',
     description: 'This command transforms text with different fonts',
     category: 'command',
     usePrefix: true,
