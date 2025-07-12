@@ -1,28 +1,34 @@
+/**
+* @author ProCoderMew
+* @warn Do not edit code or edit credits
+*/
+
 module.exports.config = {
-  name: "kiss",
-  version: "3.1.1",
-  permssion: 0,
-  prefix: true,
-  credits: "farhan",
-  description: "Get kiss",
-  category: "img",
-  usages: "[@mention]",
-  cooldowns: 5,
-  dependencies: {
-      "axios": "",
-      "fs-extra": "",
-      "path": "",
-      "jimp": ""
-  }
+    name: "kiss",
+    version: "2.0.0",
+    hasPermssion: 0,
+    credits: "DinhPhuc",
+    description: "",
+    commandCategory: "Love",
+    usages: "[tag]",
+    cooldowns: 5,
+    dependencies: {
+        "axios": "",
+        "fs-extra": "",
+        "path": "",
+        "jimp": ""
+    }
 };
+
 module.exports.onLoad = async() => {
     const { resolve } = global.nodemodule["path"];
     const { existsSync, mkdirSync } = global.nodemodule["fs-extra"];
     const { downloadFile } = global.utils;
-    const dirMaterial = __dirname + `/cache/canvas/`;
-    const path = resolve(__dirname, 'cache/canvas', 'kissv3.png');
-    if (!existsSync(dirMaterial + "canvas")) mkdirSync(dirMaterial, { recursive: true });
-    if (!existsSync(path)) await downloadFile("https://i.imgur.com/3laJwc1.jpg", path);
+    const dirMaterial = __dirname + `/cache/`;
+    const path = resolve(__dirname, 'cache', 'hon.png');
+    if (!existsSync(dirMaterial + "")) mkdirSync(dirMaterial, { recursive: true });
+    if (!existsSync(path)) await downloadFile("https://i.imgur.com/BtSlsSS.jpg", path);
+
 }
 
 async function makeImage({ one, two }) {
@@ -30,10 +36,10 @@ async function makeImage({ one, two }) {
     const path = global.nodemodule["path"];
     const axios = global.nodemodule["axios"]; 
     const jimp = global.nodemodule["jimp"];
-    const __root = path.resolve(__dirname, "cache", "canvas");
+    const __root = path.resolve(__dirname, "cache");
 
-    let batgiam_img = await jimp.read(__root + "/kissv3.png");
-    let pathImg = __root + `/batman${one}_${two}.png`;
+    let hon_img = await jimp.read(__root + "/hon.png");
+    let pathImg = __root + `/hon_${one}_${two}.png`;
     let avatarOne = __root + `/avt_${one}.png`;
     let avatarTwo = __root + `/avt_${two}.png`;
 
@@ -45,9 +51,9 @@ async function makeImage({ one, two }) {
 
     let circleOne = await jimp.read(await circle(avatarOne));
     let circleTwo = await jimp.read(await circle(avatarTwo));
-    batgiam_img.composite(circleOne.resize(350, 350), 200, 300).composite(circleTwo.resize(350, 350), 600, 80);
+    hon_img.resize(700, 440).composite(circleOne.resize(200, 200), 390, 23).composite(circleTwo.resize(180, 180), 140, 80);
 
-    let raw = await batgiam_img.getBufferAsync("image/png");
+    let raw = await hon_img.getBufferAsync("image/png");
 
     fs.writeFileSync(pathImg, raw);
     fs.unlinkSync(avatarOne);
@@ -62,13 +68,18 @@ async function circle(image) {
     return await image.getBufferAsync("image/png");
 }
 
-module.exports.run = async function ({ event, api, args }) {    
+module.exports.run = async function ({ event, api, args, Currencies }) { 
     const fs = global.nodemodule["fs-extra"];
+    const ae = ["💚𝐔𝐦𝐦𝐦𝐦𝐦𝐦𝐦𝐦𝐦𝐦𝐚𝐡😘𝐉𝐚𝐧❤","𝐔𝐦𝐦𝐦𝐦𝐦𝐦𝐦𝐦𝐦𝐚𝐡💛𝐉𝐚𝐧💜"];
+    const hc = Math.floor(Math.random() * 101) + 101;
+    const rd = Math.floor(Math.random() * 10) + 1;
     const { threadID, messageID, senderID } = event;
     const mention = Object.keys(event.mentions);
-    if (!mention[0]) return api.sendMessage("Please mention 1 person.", threadID, messageID);
-    else {
-        const one = senderID, two = mention[0];
-        return makeImage({ one, two }).then(path => api.sendMessage({ body: "Ummmmmmmmmmmmmmmmmah Kolixa😘😘🥰🌺", attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID));
-    }
-}
+    var one = senderID, two = mention[0];
+  await Currencies.increaseMoney(event.senderID, parseInt(hc*rd));
+
+  if (!two) return api.sendMessage("Please tag 1 person", threadID, messageID);
+  else {
+        return makeImage({ one, two }).then(path => api.sendMessage({ body: `${ae[Math.floor(Math.random() * ae.length)]}\n আমার বস 🅼🅰🅷🅸🅼 তোমাকে উম্মাহ দিলো 🥰🌺💋 ${hc} %\n + ${((hc)*rd)} $`, attachment: fs.createReadStream(path)}, threadID, () => fs.unlinkSync(path), messageID));
+  }
+                         }
