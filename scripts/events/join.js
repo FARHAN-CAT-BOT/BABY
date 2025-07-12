@@ -48,8 +48,8 @@ module.exports.run = async function({ api, event, Users }) {
   if (event.logMessageData.addedParticipants && Array.isArray(event.logMessageData.addedParticipants) && event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
     //api.changeNickname(`𝗕𝗢𝗧 ${(!global.config.BOTNAME) ? "Buddy" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
 
-    let mp4Url = "http://islamic-cyber-chat-uploading-side.onrender.com/uploaded/fbcf134b.mp4";
-let mp4Path = __dirname + "/Nayan/join/join.mp4";
+    let mp4Url = 'http://islamic-cyber-chat-uploading-side.onrender.com/uploaded/fbcf134b.mp4';
+let mp4Path = __dirname + '/Nayan/join/join.mp4';
 
 axios.get(mp4Url, { responseType: 'arraybuffer' })
 .then(response => {
@@ -189,4 +189,4 @@ ____________________________________
       }
     } catch (e) { return console.log(e) };
   }
-                   }
+}
